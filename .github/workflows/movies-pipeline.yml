@@ -28,7 +28,7 @@ jobs:
     - name: Send a message to Microsoft Teams
       uses: aliencube/microsoft-teams-actions@v0.8.0
       with:
-        webhook_uri: https://viaucdk.webhook.office.com/webhookb2/9f590991-f6d7-4f55-a767-55e8c7f6c82e@97e1982b-375c-460e-9071-9067de86388b/IncomingWebhook/c6824f4fa0b04f57982376231ba28621/faefbb04-5dce-4562-a8df-9ccd3a4025e1
+        webhook_uri: https://viaucdk.webhook.office.com/webhookb2/9f590991-f6d7-4f55-a767-55e8c7f6c82e@97e1982b-375c-460e-9071-9067de86388b/IncomingWebhook/9d1e1c27ae2143b69ec15ef3eef18ecc/faefbb04-5dce-4562-a8df-9ccd3a4025e1
         title: Main branch  
         summary: Main branch - pull request 
         text: A new pull request to main branch.
