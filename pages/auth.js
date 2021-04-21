@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import withAuthentication from "../hoc/withAuthentication";
 import { signIn } from "../store/reducers/authReducer";
 
 const Auth = () => {
