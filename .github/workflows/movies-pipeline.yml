@@ -7,8 +7,8 @@ on:
     branches: [ main ]
     
 jobs:
-  sonarcloud:
-    runs-on: windows-latest
+  build:
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -20,16 +20,18 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-        # Disabling shallow clone is recommended for improving relevancy of reporting
-        fetch-depth: 0
     - name: Installing packages
       run: npm ci
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      
+
+   # - name: Build static website
+   #   run: next build
+    - name: Send a message to Microsoft Teams
+      uses: aliencube/microsoft-teams-actions@v0.8.0
+      with:
+        webhook_uri: https://viaucdk.webhook.office.com/webhookb2/9f590991-f6d7-4f55-a767-55e8c7f6c82e@97e1982b-375c-460e-9071-9067de86388b/IncomingWebhook/c6824f4fa0b04f57982376231ba28621/faefbb04-5dce-4562-a8df-9ccd3a4025e1
+        title: Main branch  
+        summary: Main branch - pull request 
+        text: A new pull request to main branch.
 
  
   
