@@ -7,10 +7,11 @@ export default async function comedy_movies(req, res) {
     const movies = [];
     let data = {};
     const moviesRequest = await axios.get(
-      requests.tmdb_requests.fetchActionMovies
+      requests.tmdb_requests.fetchComedyMovies
     );
     moviesRequest.data.results.map((movie) => {
       const movieObject = {
+        id: movie.id,
         poster_path: imageUrl + movie.poster_path,
         title: movie.title,
       };

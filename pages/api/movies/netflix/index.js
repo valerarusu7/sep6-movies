@@ -1,18 +1,19 @@
 import requests from "../../requests";
 import axios from "../../TMDB_axios";
 
-export default async function netflix_movies(req, res) {
+export default async function romance_movies(req, res) {
   if ((req.method = "GET")) {
     const imageUrl = "https://image.tmdb.org/t/p/w500";
     const movies = [];
     let data = {};
     const moviesRequest = await axios.get(
-      requests.tmdb_requests.fetchActionMovies
+      requests.tmdb_requests.fetchNetflixOriginals
     );
     moviesRequest.data.results.map((movie) => {
       const movieObject = {
+        id: movie.id,
         poster_path: imageUrl + movie.poster_path,
-        title: movie.title,
+        title: movie.original_name,
       };
       movies.push(movieObject);
     });

@@ -6,11 +6,10 @@ export default async function top_rated_movies(req, res) {
     const imageUrl = "https://image.tmdb.org/t/p/w500";
     const movies = [];
     let data = {};
-    const moviesRequest = await axios.get(
-      requests.tmdb_requests.fetchActionMovies
-    );
+    const moviesRequest = await axios.get(requests.tmdb_requests.fetchTopRated);
     moviesRequest.data.results.map((movie) => {
       const movieObject = {
+        id: movie.id,
         poster_path: imageUrl + movie.poster_path,
         title: movie.title,
       };

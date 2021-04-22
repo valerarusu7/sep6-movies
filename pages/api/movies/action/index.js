@@ -11,8 +11,9 @@ export default async function action_movies(req, res) {
     );
     moviesRequest.data.results.map((movie) => {
       const movieObject = {
+        id: movie.id,
+        name: movie.title,
         poster_path: imageUrl + movie.poster_path,
-        title: movie.title,
       };
       movies.push(movieObject);
     });
