@@ -28,12 +28,21 @@ const MoviesCategory = ({ movies, categoryTitle }) => {
   return (
     <div className={styles.row}>
       <h2>{categoryTitle}</h2>
-      <Carousel responsive={responsive} showDots={true} swipeable={false} draggable={false}>
-        {/* //movies item */}
+      <Carousel
+        responsive={responsive}
+        showDots={true}
+        swipeable={false}
+        draggable={false}
+      >
         {movies !== null ? (
           movies.map((movie) => (
             <div key={movies.id} className={styles.poster}>
-              <Image src={movie.poster_path} alt={movie.title} layout="fill" />
+              <Image
+                src={movie.poster_path}
+                alt={movie.title}
+                width={260}
+                height={380}
+              />
             </div>
           ))
         ) : (

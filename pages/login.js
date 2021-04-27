@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { auth, provider } from "../firebase/firebase";
 import Head from "next/head";
+
 const Login = () => {
   useEffect(() => {}, []);
 
