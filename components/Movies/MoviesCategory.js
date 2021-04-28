@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styles from "../../styles/MoviesCategory.module.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Image from "next/image";
 
 const MoviesCategory = ({ movies, categoryTitle }) => {
   useEffect(() => {}, []);
@@ -36,10 +37,11 @@ const MoviesCategory = ({ movies, categoryTitle }) => {
         {movies !== null ? (
           movies.map((movie) => (
             <div key={movies.id} className={styles.poster}>
-              <img
-                className={styles.row__poster}
+              <Image
                 src={movie.poster_path}
                 alt={movie.title}
+                width={260}
+                height={380}
               />
             </div>
           ))
