@@ -39,11 +39,24 @@ function Home({
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
-    const netflixRequest = await axios.get(
-      `${server}${requests.server_requests.netflix}`
+    const imageUrl = "https://image.tmdb.org/t/p/w500";
+    const movies = [];
+    const moviesRequest = await fetch(
+      `https://api.themoviedb.org/3/discover/tv?api_key=e453502d7e2f31ded447961d9d1f121c&with_networks=213`
     );
+    const data = await moviesRequest.json();
+
+    data.results.map((movie) => {
+      const movieObject = {
+        id: movie.id,
+        poster_path: imageUrl + movie.poster_path,
+        title: movie.original_name,
+      };
+      movies.push(movieObject);
+    });
+
     const trendingRequest = await axios.get(
       `${server}${requests.server_requests.trending}`
     );
@@ -67,7 +80,8 @@ export async function getServerSideProps() {
     );
     return {
       props: {
-        netflix: netflixRequest.data.netflix,
+        // netflix: netflixRequest.data.netflix,
+        netflix: movies,
         trending: trendingRequest.data.trending,
         romance: romanceRequest.data.romance,
         action: actionRequest.data.action,
