@@ -1,5 +1,5 @@
-import requests from "../../requests";
-import axios from "../../TMDB_axios";
+import requests from "../../../../requests/requests";
+import axios from "../../../../requests/TMDB_axios";
 
 export default async function romance_movies(req, res) {
   if ((req.method = "GET")) {
