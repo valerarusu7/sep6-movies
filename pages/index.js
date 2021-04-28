@@ -36,7 +36,7 @@ function Home({
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const netflixRequest = await axios.get(
     `${server}${requests.server_requests.netflix}`
   );
