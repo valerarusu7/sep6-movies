@@ -3,6 +3,7 @@ import Head from "next/head";
 import MoviesCategory from "../components/Movies/MoviesCategory";
 import { server } from "../config";
 import requests from "./api/requests";
+import absoluteUrl from "next-absolute-url";
 
 function Home({
   netflix,
