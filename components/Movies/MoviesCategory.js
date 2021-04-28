@@ -36,7 +36,7 @@ const MoviesCategory = ({ movies, categoryTitle }) => {
       >
         {movies !== null ? (
           movies.map((movie) => (
-            <div key={movies.id} className={styles.poster}>
+            <div key={movie.id} className={styles.poster}>
               <Image
                 src={movie.poster_path}
                 alt={movie.title}
@@ -46,7 +46,7 @@ const MoviesCategory = ({ movies, categoryTitle }) => {
             </div>
           ))
         ) : (
-          <div></div>
+          <div key={1}></div>
         )}
       </Carousel>
     </div>
