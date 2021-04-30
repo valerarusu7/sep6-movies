@@ -1,19 +1,24 @@
+import axios from "axios";
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import FavoriteMovie from "../components/FavoriteMovie";
+import { server } from "../config";
+import requests from "./api/requests";
 
 const Favorite = ({}) => {
-  const [items, setItems] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    setItems(getItems(10));
+    getMovies();
   }, []);
 
-  const getItems = (count) =>
-    Array.from({ length: count }, (v, k) => k).map((k) => ({
-      id: `${k}`,
-      content: `Movie ${k}`,
-    }));
+  async function getMovies() {
+    const netflixRequest = await axios.get(
+      `${server}${requests.server_requests.netflix}`
+    );
+    setMovies(netflixRequest.data.netflix);
+  }
 
   // a little function to help us with reordering the result
   const reorder = (list, startIndex, endIndex) => {
@@ -24,70 +29,39 @@ const Favorite = ({}) => {
     return result;
   };
 
-  const grid = 8;
-
-  const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
-    userSelect: "none",
-    padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
-
-    // change background colour if dragging
-    background: isDragging ? "lightgreen" : "grey",
-
-    // styles we need to apply on draggables
-    ...draggableStyle,
-  });
-
-  const getListStyle = (isDraggingOver) => ({
-    background: isDraggingOver ? "lightblue" : "lightgrey",
-    padding: grid,
-    width: 250,
-  });
-
   function onDragEnd(result) {
     // dropped outside the list
     if (!result.destination) {
       return;
     }
 
-    const newItems = reorder(
-      items,
+    const newMovies = reorder(
+      movies,
       result.source.index,
       result.destination.index
     );
 
-    setItems(newItems);
+    setMovies(newMovies);
   }
 
   return (
-    <div>
+    <center
+      style={{
+        width: "70%",
+        margin: "auto",
+        display: "block",
+      }}
+    >
       <Head>
         <title>Favorites</title>
       </Head>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
+          {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              {items !== []
-                ? items.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          onClick={() => console.log(item.id)}
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          {index + 1}
-                          {item.content}
-                        </div>
-                      )}
-                    </Draggable>
+              {movies !== []
+                ? movies.map((item, index) => (
+                    <FavoriteMovie item={item} index={index} key={item.id} />
                   ))
                 : null}
               {provided.placeholder}
@@ -95,7 +69,7 @@ const Favorite = ({}) => {
           )}
         </Droppable>
       </DragDropContext>
-    </div>
+    </center>
   );
 };
 
