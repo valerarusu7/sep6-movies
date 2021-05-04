@@ -2,7 +2,7 @@ import React from "react";
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div style={{ marginTop: 50 }}>
       <main>{children}</main>
     </div>
   );

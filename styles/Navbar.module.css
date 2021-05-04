@@ -1,8 +1,19 @@
 .nav {
+  position: fixed;
+  top: 0;
+  z-index: 99;
   height: 50px;
+  width: 100%;
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  background: #1a6382;
+  background: rgb(35, 37, 38);
+  background: linear-gradient(
+    90deg,
+    rgba(35, 37, 38, 1) 35%,
+    rgba(65, 67, 69, 1) 100%
+  );
+  transition-timing-function: ease-in;
+  transition: all 0.5s;
 }
